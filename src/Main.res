@@ -1,0 +1,1 @@
+ReactDOM.render(<Hello/>, ReactDOM.querySelector("#app")->Belt.Option.getExn)
