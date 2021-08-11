@@ -2,7 +2,7 @@
   "name": "rescript-todo-app",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite & rescript build -w",
     "build": "vite build",
     "serve": "vite preview",
     "re:build": "rescript",
