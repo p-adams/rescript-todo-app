@@ -20,7 +20,9 @@ let make = () => {
   }
 
   let addTodo = () => {
-    Js.log("click")
+    let id = ReScriptHash.Sha1.make(todoText)
+    setTodoList(_prev => Js.Array2.concat(todoList, [{id: id, text: todoText, completed: false}]))
+    setTodoText(_p => "")
   }
 
   let items = Belt.Array.map(todoList, todo => {
