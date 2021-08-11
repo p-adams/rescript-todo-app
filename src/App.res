@@ -1,11 +1,6 @@
-type todo = {
-  id: string,
-  text: string,
-  completed: bool,
-}
 @react.component
 let make = () => {
-  let todos = [
+  let todos: array<Todo.todo> = [
     {id: "001", text: "Learn Rescript", completed: false},
     {id: "002", text: "Learn Ocaml", completed: false},
     {id: "003", text: "Learn FP", completed: false},
@@ -26,7 +21,7 @@ let make = () => {
   }
 
   let items = Belt.Array.map(todoList, todo => {
-    <li key={todo.id} className="todo-item"> {React.string(todo.text)} </li>
+    <ListItem key={todo.id} todo={todo} />
   })
   <>
     <h3> {React.string("Todo App")} </h3>
