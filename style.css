@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 60px auto;
+  margin: 30px auto;
 }
 
 ul {
@@ -15,7 +15,20 @@ ul {
   padding: 0;
 }
 
+li {
+  cursor: pointer;
+  margin-top: 25px;
+}
+li:hover {
+  color: blue;
+}
+
 h3 {
   text-transform: uppercase;
   font-size: 32px;
+  text-align: center;
+}
+
+.actions-in-app {
+  margin-top: 25px;
 }

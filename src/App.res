@@ -1,3 +1,4 @@
+%%raw("import '../style.css'")
 @react.component
 let make = () => {
   let url = RescriptReactRouter.useUrl()
@@ -8,6 +9,7 @@ let make = () => {
   ]
   let (todoText, setTodoText) = React.useState(_ => "")
   let (todoList, setTodoList) = React.useState(_ => todos)
+  let (selectedTodo, setSelectedTodo) = React.useState(_ => todoList[0])
   let onChange = e => {
     ReactEvent.Form.preventDefault(e)
     let v = ReactEvent.Form.target(e)["value"]
@@ -19,9 +21,18 @@ let make = () => {
     setTodoText(_p => "")
   }
 
+  let onSelect = (id: string) => {
+    let todo = Js.Array2.filter(todoList, todo => {
+      todo.id === id
+    })
+
+    setSelectedTodo(_prev => todo[0])
+    RescriptReactRouter.push("/details/")
+  }
+
   switch url.path {
-  | list{"details", id} => <TodoDetails id />
-  | list{} => <TodoList todoList todoText addTodo onChange />
+  | list{"details"} => <TodoDetails selectedTodo />
+  | list{} => <TodoList todoList todoText addTodo onChange onSelect />
   | _ => <NotFound />
   }
 }

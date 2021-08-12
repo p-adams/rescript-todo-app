@@ -1,4 +1,7 @@
 @react.component
-let make = (~id: string) => {
-  <div> {React.string("Todo Details Page " ++ id)} </div>
+let make = (~selectedTodo: Todo.todo) => {
+  <div>
+    <a href="/"> {React.string("Home")} </a>
+    {React.string("Todo Details Page " ++ selectedTodo.text ++ selectedTodo.id)}
+  </div>
 }
