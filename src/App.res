@@ -29,10 +29,12 @@ let make = () => {
     setSelectedTodo(_prev => todo[0])
     RescriptReactRouter.push("/details/")
   }
-
-  switch url.path {
-  | list{"details"} => <TodoDetails selectedTodo />
-  | list{} => <TodoList todoList todoText addTodo onChange onSelect />
-  | _ => <NotFound />
-  }
+  <>
+    <nav> <a href="/"> {React.string("Home")} </a> </nav>
+    {switch url.path {
+    | list{"details"} => <TodoDetails selectedTodo />
+    | list{} => <TodoList todoList todoText addTodo onChange onSelect />
+    | _ => <NotFound />
+    }}
+  </>
 }
