@@ -25,6 +25,10 @@ li {
 li span.icon {
   margin-left: 10px;
 }
+li span.todo-text {
+  margin-left: 10px;
+  flex: 1;
+}
 li span.todo-text:hover {
   color: blue;
 }
