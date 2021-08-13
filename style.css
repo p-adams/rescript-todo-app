@@ -16,10 +16,16 @@ ul {
 }
 
 li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   cursor: pointer;
   margin-top: 25px;
 }
-li:hover {
+li span.icon {
+  margin-left: 10px;
+}
+li span.todo-text:hover {
   color: blue;
 }
 
