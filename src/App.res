@@ -3,9 +3,9 @@
 let make = () => {
   let url = RescriptReactRouter.useUrl()
   let todos: array<Todo.todo> = [
-    {id: "001", text: "Learn Rescript", completed: false},
-    {id: "002", text: "Learn Ocaml", completed: false},
-    {id: "003", text: "Learn FP", completed: false},
+    {id: "001", text: "Learn Rescript", completed: false, checked: false},
+    {id: "002", text: "Learn Ocaml", completed: false, checked: false},
+    {id: "003", text: "Learn FP", completed: false, checked: false},
   ]
   let (todoText, setTodoText) = React.useState(_ => "")
   let (todoList, setTodoList) = React.useState(_ => todos)
@@ -17,7 +17,9 @@ let make = () => {
   }
   let addTodo = () => {
     let id = ReScriptHash.Sha1.make(todoText)
-    setTodoList(_prev => Js.Array2.concat(todoList, [{id: id, text: todoText, completed: false}]))
+    setTodoList(_prev =>
+      Js.Array2.concat(todoList, [{id: id, text: todoText, completed: false, checked: false}])
+    )
     setTodoText(_p => "")
   }
   let toggleDone = (id: string) => {
@@ -46,15 +48,30 @@ let make = () => {
 
   let onCheck = (e, id: string) => {
     let isChecked = ReactEvent.Form.target(e)["checked"]
-    Js.log(isChecked)
-    Js.log(id)
+
+    let checkedTodoList = Js.Array2.map(todoList, todo => {
+      if todo.id === id {
+        {
+          ...todo,
+          checked: isChecked,
+        }
+      } else {
+        todo
+      }
+    })
+    setTodoList(_prev => checkedTodoList)
+  }
+
+  let checkedTodoCount = () => {
+    Js.Array2.length(Js.Array2.filter(todoList, todo => todo.checked))
   }
 
   <>
     <nav> <a href="/"> {React.string("Home")} </a> </nav>
     {switch url.path {
     | list{"details"} => <TodoDetails selectedTodo />
-    | list{} => <TodoList todoList todoText addTodo onChange onSelect toggleDone onCheck />
+    | list{} =>
+      <TodoList todoList todoText addTodo onChange onSelect toggleDone onCheck checkedTodoCount />
     | _ => <NotFound />
     }}
   </>
