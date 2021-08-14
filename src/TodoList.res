@@ -5,6 +5,10 @@ let make = (~todoList, ~todoText: string, ~onChange, ~addTodo, ~onSelect, ~toggl
   })
   <div className="todo-list-container">
     <h3> {React.string("Todo App")} </h3>
+    <div className="bulk-select-action-bar">
+      <label> {React.string("mark as complete")} <span className="icon fas fa-check" /> </label>
+      <label> {React.string("delete")} <span className="icon fas fa-trash" /> </label>
+    </div>
     <ul> {React.array(items)} </ul>
     <div className="actions-in-app">
       <input placeholder="enter text" onChange value={todoText} />
