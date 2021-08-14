@@ -29,6 +29,9 @@ li span.todo-text {
   margin-left: 10px;
   flex: 1;
 }
+li span.todo-text.completed {
+  text-decoration: line-through;
+}
 li span.todo-text:hover {
   color: blue;
 }

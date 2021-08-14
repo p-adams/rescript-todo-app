@@ -1,4 +1,3 @@
-%%raw("import '../style.css'")
 @react.component
 let make = () => {
   let url = RescriptReactRouter.useUrl()
@@ -20,6 +19,20 @@ let make = () => {
     setTodoList(_prev => Js.Array2.concat(todoList, [{id: id, text: todoText, completed: false}]))
     setTodoText(_p => "")
   }
+  let toggleDone = (id: string) => {
+    let updatedTodoList = Js.Array2.map(todoList, todo => {
+      if todo.id === id {
+        {
+          ...todo,
+          completed: !todo.completed,
+        }
+      } else {
+        todo
+      }
+    })
+
+    setTodoList(_p => updatedTodoList)
+  }
 
   let onSelect = (id: string) => {
     let todo = Js.Array2.filter(todoList, todo => {
@@ -33,7 +46,7 @@ let make = () => {
     <nav> <a href="/"> {React.string("Home")} </a> </nav>
     {switch url.path {
     | list{"details"} => <TodoDetails selectedTodo />
-    | list{} => <TodoList todoList todoText addTodo onChange onSelect />
+    | list{} => <TodoList todoList todoText addTodo onChange onSelect toggleDone />
     | _ => <NotFound />
     }}
   </>
