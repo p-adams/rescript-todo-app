@@ -1,7 +1,15 @@
 @react.component
-let make = (~todoList, ~todoText: string, ~onChange, ~addTodo, ~onSelect, ~toggleDone) => {
+let make = (
+  ~todoList,
+  ~todoText: string,
+  ~onChange,
+  ~addTodo,
+  ~onSelect,
+  ~toggleDone,
+  ~onCheck,
+) => {
   let items = Belt.Array.map(todoList, todo => {
-    <TodoItem key={todo.id} todo={todo} onSelect toggleDone />
+    <TodoItem key={todo.id} todo={todo} onSelect toggleDone onCheck />
   })
   <div className="todo-list-container">
     <h3> {React.string("Todo App")} </h3>

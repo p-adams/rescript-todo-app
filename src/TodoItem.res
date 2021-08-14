@@ -1,7 +1,7 @@
 @react.component
-let make = (~todo: Todo.todo, ~onSelect, ~toggleDone) => {
+let make = (~todo: Todo.todo, ~onSelect, ~toggleDone, ~onCheck) => {
   <li className="todo-item">
-    <input type_="checkbox" />
+    <input type_="checkbox" onChange={e => onCheck(e, todo.id)} />
     <span
       className={`todo-text ${todo.completed ? "completed" : ""}`} onClick={_ => onSelect(todo.id)}>
       {React.string(todo.text)}

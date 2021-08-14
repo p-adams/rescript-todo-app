@@ -1,3 +1,4 @@
+@val external unsafe_targetValue: ReactEvent.Form.t => string = "target.value"
 @react.component
 let make = () => {
   let url = RescriptReactRouter.useUrl()
@@ -42,11 +43,18 @@ let make = () => {
     setSelectedTodo(_prev => todo[0])
     RescriptReactRouter.push("/details/")
   }
+
+  let onCheck = (e, id: string) => {
+    let isChecked = ReactEvent.Form.target(e)["checked"]
+    Js.log(isChecked)
+    Js.log(id)
+  }
+
   <>
     <nav> <a href="/"> {React.string("Home")} </a> </nav>
     {switch url.path {
     | list{"details"} => <TodoDetails selectedTodo />
-    | list{} => <TodoList todoList todoText addTodo onChange onSelect toggleDone />
+    | list{} => <TodoList todoList todoText addTodo onChange onSelect toggleDone onCheck />
     | _ => <NotFound />
     }}
   </>
