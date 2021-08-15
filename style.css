@@ -53,6 +53,30 @@ h3 {
   text-transform: uppercase;
   font-size: 32px;
   text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  min-width: 300px;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+nav img {
+  height: 30px;
+  width: 30px;
+}
+nav .link-container {
+  display: flex;
+  align-items: flex-end;
+}
+.link-container a {
+  color: slategray;
+  margin-right: 10px;
 }
 
 button {
@@ -79,8 +103,12 @@ button.light {
   cursor: pointer;
 }
 
+.icon.completed {
+  color: limegreen;
+}
+
 main {
-  padding: 20px;
+  padding: 10px;
 }
 
 main.selected-border {

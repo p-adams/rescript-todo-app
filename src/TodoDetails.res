@@ -3,7 +3,6 @@ let make = (~id, ~todoList: array<Todo.todo>) => {
   let selectedTodo2 = Js.Array2.find(todoList, todo => {
     todo.id === id
   })
-  Js.log(id)
   let timer = ref(Js.Nullable.null)
   let redirectHome = () => RescriptReactRouter.push("/")
   if selectedTodo2 == None {

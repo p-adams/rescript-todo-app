@@ -13,15 +13,15 @@ let make = (
   let items = Belt.Array.map(todoList, todo => {
     <TodoItem key={todo.id} todo={todo} toggleDone onCheck />
   })
+  let hasCheckedTodos = checkedTodoCount() > 0
   <div className="todo-list-container">
-    <h3> {React.string("Todo App")} </h3>
-    <main className={checkedTodoCount() > 0 ? "selected-border" : ""}>
+    <main className={hasCheckedTodos ? "selected-border" : ""}>
       <div className="todo-header">
         <label>
           <input type_="checkbox" onChange={e => onCheckAll(e)} />
           <span> {React.string(!toggleSelectAll ? "Select All" : "Deselect All")} </span>
         </label>
-        <div className={`checked-count ${checkedTodoCount() > 0 ? "fadein" : "fadeout"}`}>
+        <div className={`checked-count ${hasCheckedTodos ? "fadein" : "fadeout"}`}>
           {React.int(checkedTodoCount())}
         </div>
       </div>
@@ -30,7 +30,7 @@ let make = (
         <input placeholder="enter text" onChange value={todoText} />
         <button className="dark" onClick={_ => addTodo()}> {React.string("Add")} </button>
       </div>
-      <div className={`bulk-select-action-bar ${checkedTodoCount() > 0 ? "fadein" : "fadeout"}`}>
+      <div className={`bulk-select-action-bar ${hasCheckedTodos ? "fadein" : "fadeout"}`}>
         <label> {React.string("mark as complete")} <span className="icon fas fa-check" /> </label>
         <label> {React.string("delete")} <span className="icon fas fa-trash" /> </label>
         <button className="light"> {React.string("Cancel")} </button>

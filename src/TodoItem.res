@@ -5,7 +5,10 @@ let make = (~todo: Todo.todo, ~toggleDone, ~onCheck) => {
     <a href={`/details/${todo.id}`} className={`todo-text ${todo.completed ? "completed" : ""}`}>
       {React.string(todo.text)}
     </a>
-    <span className="icon fas fa-check" onClick={_ => toggleDone(todo.id)} />
+    <span
+      className={`icon ${todo.completed ? "completed" : ""} fas fa-check`}
+      onClick={_ => toggleDone(todo.id)}
+    />
     <span className="icon fas fa-edit" />
     <span className="icon fas fa-trash" />
   </li>

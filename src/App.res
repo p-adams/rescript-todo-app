@@ -66,7 +66,10 @@ let make = () => {
   }
 
   <>
-    <nav> <a href="/"> {React.string("Home")} </a> </nav>
+    <nav>
+      <img src={"/favicon.ico"} alt="todo" />
+      <div className="link-container"> <a href="/"> {React.string("Home")} </a> </div>
+    </nav>
     {switch url.path {
     | list{"details", id} => <TodoDetails id todoList />
     | list{} =>
