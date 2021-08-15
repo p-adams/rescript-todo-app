@@ -14,13 +14,11 @@ let make = (
   })
   <div className="todo-list-container">
     <h3> {React.string("Todo App")} </h3>
-    {checkedTodoCount() > 0
-      ? <div className="bulk-select-action-bar">
-          <div> {React.int(checkedTodoCount())} </div>
-          <label> {React.string("mark as complete")} <span className="icon fas fa-check" /> </label>
-          <label> {React.string("delete")} <span className="icon fas fa-trash" /> </label>
-        </div>
-      : React.null}
+    <div className={`bulk-select-action-bar ${checkedTodoCount() > 0 ? "fadein" : "fadeout"}`}>
+      <div className="checked-count"> {React.int(checkedTodoCount())} </div>
+      <label> {React.string("mark as complete")} <span className="icon fas fa-check" /> </label>
+      <label> {React.string("delete")} <span className="icon fas fa-trash" /> </label>
+    </div>
     <ul> {React.array(items)} </ul>
     <div className="actions-in-app">
       <input placeholder="enter text" onChange value={todoText} />

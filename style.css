@@ -1,5 +1,8 @@
 :root {
   --label-line-height: 35px;
+  --input-border-radius: 8px;
+  --input-height: 30px;
+  --input-box-shadow: 0 2px 6px rgb(58, 57, 68, 0.2);
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -45,6 +48,17 @@ h3 {
   text-align: center;
 }
 
+button {
+  border: none;
+  min-height: var(--input-height);
+  border-radius: var(--input-border-radius);
+  box-shadow: var(--input-box-shadow);
+  min-width: 50px;
+  background-color: slategray;
+  color: white;
+  font-weight: bold;
+}
+
 .icon {
   cursor: pointer;
 }
@@ -56,7 +70,40 @@ h3 {
   background-color: slategray;
   color: white;
   text-transform: uppercase;
+  animation: slide-in 5s ease;
 }
+
+.bulk-select-action-bar.fadeout {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 300ms, opacity 2ms;
+}
+.bulk-select-action-bar.fadein {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 2s;
+}
+
+.checked-count {
+  background: slateblue;
+  color: white;
+  font-weight: bold;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  position: absolute;
+  right: 50px;
+  bottom: 200px;
+  left: 59%;
+  top: 20%;
+}
+
+.bulk-select-action-bar.slide-out {
+  animation: slide-out 5s ease;
+}
+
 .bulk-select-action-bar label {
   font-weight: bold;
   display: flex;
@@ -74,18 +121,7 @@ h3 {
 .bulk-select-action-bar label .icon.fas.fa-trash:hover {
   color: red;
 }
-.outer-wrapper.newtab-experience .search-wrapper .search-handoff-button,
-.outer-wrapper.newtab-experience .search-wrapper input {
-  background-size: 24px;
-  padding-inline-start: 52px;
-  padding-inline-end: 10px;
-  box-shadow: var(--newtab-search-first-shadow);
-  border: 1px solid transparent;
-  border-radius: 8px;
-  color: var(--newtab-search-text-color);
-  font-weight: 500;
-  font-size: 15px;
-}
+
 .actions-in-app {
   margin-top: 25px;
 }
@@ -93,13 +129,13 @@ h3 {
   background-size: 24px;
   padding-inline-start: 22px;
   padding-inline-end: 10px;
-  box-shadow: 0 2px 6px rgb(58, 57, 68, 0.2);
+  box-shadow: var(--input-box-shadow);
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: var(--input-border-radius);
   color: #585165;
   font-weight: 500;
   font-size: 15px;
-  height: 30px;
+  height: var(--input-height);
 }
 .actions-in-app button {
   margin-left: 10px;
