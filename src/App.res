@@ -1,4 +1,3 @@
-@val external unsafe_targetValue: ReactEvent.Form.t => string = "target.value"
 @react.component
 let make = () => {
   let url = RescriptReactRouter.useUrl()
