@@ -1,3 +1,4 @@
+@send external focus: Dom.element => unit = "focus"
 @react.component
 let make = (
   ~todoList,
@@ -10,6 +11,19 @@ let make = (
   ~onCheckAll,
   ~toggleSelectAll,
 ) => {
+  let textInput = React.useRef(Js.Nullable.null)
+
+  let focusInput = () =>
+    switch textInput.current->Js.Nullable.toOption {
+    | Some(dom) => dom->focus
+    | None => ()
+    }
+
+  React.useEffect(() => {
+    focusInput()
+    None
+  })
+
   let items = Belt.Array.map(todoList, todo => {
     <TodoItem key={todo.id} todo={todo} toggleDone onCheck />
   })
@@ -27,7 +41,9 @@ let make = (
       </div>
       <ul> {React.array(items)} </ul>
       <div className="actions-in-app">
-        <input placeholder="enter text" onChange value={todoText} />
+        <input
+          ref={ReactDOM.Ref.domRef(textInput)} placeholder="enter text" onChange value={todoText}
+        />
         <button className="dark" onClick={_ => addTodo()}> {React.string("Add")} </button>
       </div>
       <div className={`bulk-select-action-bar ${hasCheckedTodos ? "fadein" : "fadeout"}`}>
