@@ -9,7 +9,7 @@ let make = () => {
   let (todoText, setTodoText) = React.useState(_ => "")
   let (todoList, setTodoList) = React.useState(_ => todos)
   let (toggleSelectAll, setToggleSelectAll) = React.useState(_ => false)
-  let (selectedTodo, setSelectedTodo) = React.useState(_ => todoList[0])
+
   let onChange = e => {
     ReactEvent.Form.preventDefault(e)
     let v = ReactEvent.Form.target(e)["value"]
@@ -44,8 +44,7 @@ let make = () => {
       todo.id === id
     })
 
-    setSelectedTodo(_prev => todo[0])
-    RescriptReactRouter.push("/details/")
+    RescriptReactRouter.push("/details/" ++ todo[0].id)
   }
 
   let onCheck = (e, id: string) => {
@@ -77,7 +76,7 @@ let make = () => {
   <>
     <nav> <a href="/"> {React.string("Home")} </a> </nav>
     {switch url.path {
-    | list{"details"} => <TodoDetails selectedTodo />
+    | list{"details", id} => <TodoDetails id todoList />
     | list{} =>
       <TodoList
         todoList
