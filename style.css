@@ -3,6 +3,7 @@
   --input-border-radius: 8px;
   --input-height: 30px;
   --input-box-shadow: 0 2px 6px rgb(58, 57, 68, 0.2);
+  --text-left-margin: 10px;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -29,10 +30,10 @@ li {
   margin-top: 25px;
 }
 li span.icon {
-  margin-left: 10px;
+  margin-left: var(--text-left-margin);
 }
 li span.todo-text {
-  margin-left: 10px;
+  margin-left: var(--text-left-margin);
   flex: 1;
 }
 li span.todo-text.completed {
@@ -54,8 +55,17 @@ button {
   border-radius: var(--input-border-radius);
   box-shadow: var(--input-box-shadow);
   min-width: 50px;
+  font-weight: bold;
+}
+
+button.dark {
   background-color: slategray;
   color: white;
+}
+
+button.light {
+  background-color: white;
+  color: slategray;
   font-weight: bold;
 }
 
@@ -63,20 +73,29 @@ button {
   cursor: pointer;
 }
 
+.todo-header {
+  border-bottom: 1px solid lightgray;
+  height: 30px;
+}
+
+.todo-header span {
+  margin-left: var(--text-left-margin);
+}
+
 .bulk-select-action-bar {
   display: flex;
   flex-direction: column;
   padding: 10px;
+  margin-top: 25px;
   background-color: slategray;
   color: white;
   text-transform: uppercase;
-  animation: slide-in 5s ease;
 }
 
 .bulk-select-action-bar.fadeout {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s linear 300ms, opacity 2ms;
+  transition: visibility 0s linear 300ms, opacity 2s;
 }
 .bulk-select-action-bar.fadein {
   visibility: visible;
@@ -96,12 +115,8 @@ button {
   position: absolute;
   right: 50px;
   bottom: 200px;
-  left: 59%;
-  top: 20%;
-}
-
-.bulk-select-action-bar.slide-out {
-  animation: slide-out 5s ease;
+  left: 60%;
+  top: 47%;
 }
 
 .bulk-select-action-bar label {

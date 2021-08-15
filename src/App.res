@@ -9,6 +9,7 @@ let make = () => {
   ]
   let (todoText, setTodoText) = React.useState(_ => "")
   let (todoList, setTodoList) = React.useState(_ => todos)
+  let (toggleSelectAll, setToggleSelectAll) = React.useState(_ => false)
   let (selectedTodo, setSelectedTodo) = React.useState(_ => todoList[0])
   let onChange = e => {
     ReactEvent.Form.preventDefault(e)
@@ -16,11 +17,13 @@ let make = () => {
     setTodoText(_prev => v)
   }
   let addTodo = () => {
-    let id = ReScriptHash.Sha1.make(todoText)
-    setTodoList(_prev =>
-      Js.Array2.concat(todoList, [{id: id, text: todoText, completed: false, checked: false}])
-    )
-    setTodoText(_p => "")
+    if todoText !== "" {
+      let id = ReScriptHash.Sha1.make(todoText)
+      setTodoList(_prev =>
+        Js.Array2.concat(todoList, [{id: id, text: todoText, completed: false, checked: false}])
+      )
+      setTodoText(_p => "")
+    }
   }
   let toggleDone = (id: string) => {
     let updatedTodoList = Js.Array2.map(todoList, todo => {
@@ -62,6 +65,12 @@ let make = () => {
     setTodoList(_prev => checkedTodoList)
   }
 
+  let onCheckAll = e => {
+    // TODO: implement check all
+    setToggleSelectAll(_prev => !toggleSelectAll)
+    Js.log(e)
+  }
+
   let checkedTodoCount = () => {
     Js.Array2.length(Js.Array2.filter(todoList, todo => todo.checked))
   }
@@ -71,7 +80,18 @@ let make = () => {
     {switch url.path {
     | list{"details"} => <TodoDetails selectedTodo />
     | list{} =>
-      <TodoList todoList todoText addTodo onChange onSelect toggleDone onCheck checkedTodoCount />
+      <TodoList
+        todoList
+        todoText
+        addTodo
+        onChange
+        onSelect
+        toggleDone
+        onCheck
+        checkedTodoCount
+        onCheckAll
+        toggleSelectAll
+      />
     | _ => <NotFound />
     }}
   </>
