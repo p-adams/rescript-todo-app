@@ -4,6 +4,8 @@
   --input-height: 30px;
   --input-box-shadow: 0 2px 6px rgb(58, 57, 68, 0.2);
   --text-left-margin: 10px;
+  --selected-blue: slateblue;
+  --selected-border: 1px dotted var(--selected-blue);
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -14,6 +16,10 @@
   flex-direction: column;
   align-items: center;
   margin: 30px auto;
+}
+
+a {
+  text-decoration: none;
 }
 
 ul {
@@ -32,14 +38,14 @@ li {
 li span.icon {
   margin-left: var(--text-left-margin);
 }
-li span.todo-text {
+li a.todo-text {
   margin-left: var(--text-left-margin);
   flex: 1;
 }
-li span.todo-text.completed {
+li a.todo-text.completed {
   text-decoration: line-through;
 }
-li span.todo-text:hover {
+li a.todo-text:hover {
   color: blue;
 }
 
@@ -73,7 +79,18 @@ button.light {
   cursor: pointer;
 }
 
+main {
+  padding: 20px;
+}
+
+main.selected-border {
+  border-right: var(--selected-border);
+  border-bottom: var(--selected-border);
+}
+
 .todo-header {
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid lightgray;
   height: 30px;
 }
@@ -104,19 +121,26 @@ button.light {
 }
 
 .checked-count {
-  background: slateblue;
+  background: var(--selected-blue);
   color: white;
   font-weight: bold;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   border-radius: 50%;
+  box-shadow: var(--input-box-shadow);
   text-align: center;
-  line-height: 30px;
-  position: absolute;
-  right: 50px;
-  bottom: 200px;
-  left: 60%;
-  top: 47%;
+  line-height: 25px;
+}
+
+.checked-count.fadeout {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 300ms, opacity 2s;
+}
+.checked-count.fadein {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 2s;
 }
 
 .bulk-select-action-bar label {

@@ -39,14 +39,6 @@ let make = () => {
     setTodoList(_p => updatedTodoList)
   }
 
-  let onSelect = (id: string) => {
-    let todo = Js.Array2.filter(todoList, todo => {
-      todo.id === id
-    })
-
-    RescriptReactRouter.push("/details/" ++ todo[0].id)
-  }
-
   let onCheck = (e, id: string) => {
     let isChecked = ReactEvent.Form.target(e)["checked"]
 
@@ -83,7 +75,6 @@ let make = () => {
         todoText
         addTodo
         onChange
-        onSelect
         toggleDone
         onCheck
         checkedTodoCount
