@@ -65,6 +65,10 @@ let make = () => {
     Js.Array2.length(Js.Array2.filter(todoList, todo => todo.checked))
   }
 
+  let deleteTodo = (id: string) => {
+    Js.log(id)
+  }
+
   <>
     <nav>
       <img src={"/favicon.ico"} alt="todo" />
@@ -83,6 +87,7 @@ let make = () => {
         checkedTodoCount
         onCheckAll
         toggleSelectAll
+        deleteTodo
       />
     | _ => <NotFound />
     }}

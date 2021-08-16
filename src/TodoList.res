@@ -10,6 +10,7 @@ let make = (
   ~checkedTodoCount,
   ~onCheckAll,
   ~toggleSelectAll,
+  ~deleteTodo,
 ) => {
   let textInput = React.useRef(Js.Nullable.null)
 
@@ -25,7 +26,7 @@ let make = (
   })
 
   let items = Belt.Array.map(todoList, todo => {
-    <TodoItem key={todo.id} todo={todo} toggleDone onCheck />
+    <TodoItem key={todo.id} todo={todo} toggleDone onCheck deleteTodo />
   })
   let hasCheckedTodos = checkedTodoCount() > 0
   <div className="todo-list-container">
