@@ -66,7 +66,10 @@ let make = () => {
   }
 
   let deleteTodo = (id: string) => {
-    Js.log(id)
+    let updatedTodos = Js.Array2.filter(todoList, todo => {
+      todo.id !== id
+    })
+    setTodoList(_prev => updatedTodos)
   }
 
   <>
