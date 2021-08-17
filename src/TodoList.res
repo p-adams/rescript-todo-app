@@ -15,6 +15,8 @@ let make = (
   ~editMode: Todo.editMode,
   ~onEdit,
   ~editText,
+  ~cancelEdit,
+  ~saveEdit,
 ) => {
   let textInput = React.useRef(Js.Nullable.null)
   let editTextInput = React.useRef(Js.Nullable.null)
@@ -62,12 +64,12 @@ let make = (
             />
             <button className="dark" onClick={_ => addTodo()}> {React.string("Add")} </button>
           </>
-        | Some(t) => <>
+        | Some(_) => <>
             <input
               ref={ReactDOM.Ref.domRef(editTextInput)} onChange={e => onEdit(e)} value={editText}
             />
-            <button className="dark"> {React.string("Cancel")} </button>
-            <button className="dark"> {React.string("Save")} </button>
+            <button className="dark" onClick={_ => cancelEdit()}> {React.string("Cancel")} </button>
+            <button className="dark" onClick={_ => saveEdit()}> {React.string("Save")} </button>
           </>
         }}
       </div>

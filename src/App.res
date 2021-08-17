@@ -121,6 +121,25 @@ let make = () => {
     setEditText(_prev => v)
   }
 
+  let cancelEdit = () => {
+    setEditMode(_prev => {id: "", isEditing: false})
+  }
+
+  let saveEdit = () => {
+    let updatedTodos = Js.Array2.map(todoList, todo => {
+      if todo.id === editMode.id {
+        {
+          ...todo,
+          text: editText !== "" ? editText : todo.text,
+        }
+      } else {
+        todo
+      }
+    })
+    setTodoList(_prev => updatedTodos)
+    setEditText(_prev => "")
+  }
+
   <>
     <nav>
       <img src={"/favicon.ico"} alt="todo" />
@@ -144,6 +163,8 @@ let make = () => {
         editMode
         onEdit
         editText
+        cancelEdit
+        saveEdit
       />
     | _ => <NotFound />
     }}
