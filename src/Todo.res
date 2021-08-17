@@ -3,6 +3,7 @@ type todo = {
   text: string,
   completed: bool,
   checked: bool,
+  created_at: string,
 }
 
 module Todo = {

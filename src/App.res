@@ -1,11 +1,30 @@
+let todos: array<Todo.todo> = [
+  {
+    id: "001",
+    text: "Learn Rescript",
+    completed: false,
+    checked: false,
+    created_at: Js.Date.toLocaleString(Js.Date.make()),
+  },
+  {
+    id: "002",
+    text: "Learn Ocaml",
+    completed: false,
+    checked: false,
+    created_at: Js.Date.toLocaleString(Js.Date.make()),
+  },
+  {
+    id: "003",
+    text: "Learn FP",
+    completed: false,
+    checked: false,
+    created_at: Js.Date.toLocaleString(Js.Date.make()),
+  },
+]
 @react.component
 let make = () => {
   let url = RescriptReactRouter.useUrl()
-  let todos: array<Todo.todo> = [
-    {id: "001", text: "Learn Rescript", completed: false, checked: false},
-    {id: "002", text: "Learn Ocaml", completed: false, checked: false},
-    {id: "003", text: "Learn FP", completed: false, checked: false},
-  ]
+
   let (todoText, setTodoText) = React.useState(_ => "")
   let (todoList, setTodoList) = React.useState(_ => todos)
   let (toggleSelectAll, setToggleSelectAll) = React.useState(_ => false)
@@ -19,7 +38,18 @@ let make = () => {
     if todoText !== "" {
       let id = ReScriptHash.Sha1.make(todoText)
       setTodoList(_prev =>
-        Js.Array2.concat(todoList, [{id: id, text: todoText, completed: false, checked: false}])
+        Js.Array2.concat(
+          todoList,
+          [
+            {
+              id: id,
+              text: todoText,
+              completed: false,
+              checked: false,
+              created_at: Js.Date.toLocaleString(Js.Date.make()),
+            },
+          ],
+        )
       )
       setTodoText(_p => "")
     }

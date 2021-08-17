@@ -207,3 +207,27 @@ main.selected-border {
 .actions-in-app button {
   margin-left: 10px;
 }
+
+.todo-details {
+  min-height: 400px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-details .field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  line-height: 40px;
+}
+
+.todo-details .field .label {
+  font-weight: bold;
+  color: slategray;
+}
+
+.todo-details .field p {
+  padding: 0;
+  margin: 0;
+}

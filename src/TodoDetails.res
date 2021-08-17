@@ -11,6 +11,17 @@ let make = (~id, ~todoList: array<Todo.todo>) => {
   }
   switch selectedTodo2 {
   | None => <div> {React.string("Todo cannot be found. Redirecting...")} </div>
-  | Some(todo) => <div> {React.string("Todo Details Page " ++ todo.text)} </div>
+  | Some(todo) =>
+    <div className="todo-details">
+      <div className="field">
+        <span className="label"> <S str="ID" /> </span> <p> <S str={todo.id} /> </p>
+      </div>
+      <div className="field">
+        <span className="label"> <S str="TODO" /> </span> <p> <S str={todo.text} /> </p>
+      </div>
+      <div className="field">
+        <span className="label"> <S str="CREATED AT" /> </span> <p> <S str={todo.created_at} /> </p>
+      </div>
+    </div>
   }
 }
