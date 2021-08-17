@@ -11,8 +11,13 @@ let make = (
   ~onCheckAll,
   ~toggleSelectAll,
   ~deleteTodo,
+  ~editTodo,
+  ~editMode: Todo.editMode,
+  ~onEdit,
+  ~editText,
 ) => {
   let textInput = React.useRef(Js.Nullable.null)
+  let editTextInput = React.useRef(Js.Nullable.null)
 
   let focusInput = () =>
     switch textInput.current->Js.Nullable.toOption {
@@ -25,10 +30,15 @@ let make = (
     None
   })
 
-  let items = Belt.Array.map(todoList, todo => {
-    <TodoItem key={todo.id} todo={todo} toggleDone onCheck deleteTodo />
+  let items = Js.Array2.map(todoList, todo => {
+    <TodoItem key={todo.id} todo={todo} toggleDone onCheck deleteTodo editTodo />
   })
   let hasCheckedTodos = checkedTodoCount() > 0
+
+  let todoToEdit = Js.Array2.find(todoList, todo => {
+    todo.id === editMode.id
+  })
+
   <div className="todo-list-container">
     <main className={hasCheckedTodos ? "selected-border" : ""}>
       <div className="todo-header">
@@ -42,10 +52,24 @@ let make = (
       </div>
       <ul> {React.array(items)} </ul>
       <div className="actions-in-app">
-        <input
-          ref={ReactDOM.Ref.domRef(textInput)} placeholder="enter text" onChange value={todoText}
-        />
-        <button className="dark" onClick={_ => addTodo()}> {React.string("Add")} </button>
+        {switch todoToEdit {
+        | None => <>
+            <input
+              ref={ReactDOM.Ref.domRef(textInput)}
+              placeholder="enter text"
+              onChange
+              value={todoText}
+            />
+            <button className="dark" onClick={_ => addTodo()}> {React.string("Add")} </button>
+          </>
+        | Some(t) => <>
+            <input
+              ref={ReactDOM.Ref.domRef(editTextInput)} onChange={e => onEdit(e)} value={editText}
+            />
+            <button className="dark"> {React.string("Cancel")} </button>
+            <button className="dark"> {React.string("Save")} </button>
+          </>
+        }}
       </div>
       <div className={`bulk-select-action-bar ${hasCheckedTodos ? "fadein" : "fadeout"}`}>
         <label> {React.string("mark as complete")} <span className="icon fas fa-check" /> </label>

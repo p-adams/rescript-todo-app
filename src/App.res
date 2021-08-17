@@ -21,6 +21,11 @@ let todos: array<Todo.todo> = [
     created_at: Js.Date.toLocaleString(Js.Date.make()),
   },
 ]
+
+let editState: Todo.editMode = {
+  id: "",
+  isEditing: false,
+}
 @react.component
 let make = () => {
   let url = RescriptReactRouter.useUrl()
@@ -28,6 +33,8 @@ let make = () => {
   let (todoText, setTodoText) = React.useState(_ => "")
   let (todoList, setTodoList) = React.useState(_ => todos)
   let (toggleSelectAll, setToggleSelectAll) = React.useState(_ => false)
+  let (editMode, setEditMode) = React.useState(_ => editState)
+  let (editText, setEditText) = React.useState(_ => "")
 
   let onChange = e => {
     ReactEvent.Form.preventDefault(e)
@@ -102,6 +109,18 @@ let make = () => {
     setTodoList(_prev => updatedTodos)
   }
 
+  let editTodo = (id: string, text: string) => {
+    // TODO: implement edit todo
+    setEditMode(_prev => {id: id, isEditing: !editMode.isEditing})
+    setEditText(_prev => text)
+  }
+
+  let onEdit = e => {
+    ReactEvent.Form.preventDefault(e)
+    let v = ReactEvent.Form.target(e)["value"]
+    setEditText(_prev => v)
+  }
+
   <>
     <nav>
       <img src={"/favicon.ico"} alt="todo" />
@@ -121,6 +140,10 @@ let make = () => {
         onCheckAll
         toggleSelectAll
         deleteTodo
+        editTodo
+        editMode
+        onEdit
+        editText
       />
     | _ => <NotFound />
     }}
