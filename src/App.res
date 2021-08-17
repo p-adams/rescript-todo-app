@@ -25,6 +25,7 @@ let todos: array<Todo.todo> = [
 let editState: Todo.editMode = {
   id: "",
   isEditing: false,
+  text: "",
 }
 @react.component
 let make = () => {
@@ -34,7 +35,6 @@ let make = () => {
   let (todoList, setTodoList) = React.useState(_ => todos)
   let (toggleSelectAll, setToggleSelectAll) = React.useState(_ => false)
   let (editMode, setEditMode) = React.useState(_ => editState)
-  let (editText, setEditText) = React.useState(_ => "")
 
   let onChange = e => {
     ReactEvent.Form.preventDefault(e)
@@ -110,19 +110,17 @@ let make = () => {
   }
 
   let editTodo = (id: string, text: string) => {
-    // TODO: implement edit todo
-    setEditMode(_prev => {id: id, isEditing: !editMode.isEditing})
-    setEditText(_prev => text)
+    setEditMode(_prev => {id: id, isEditing: !editMode.isEditing, text: text})
   }
 
   let onEdit = e => {
     ReactEvent.Form.preventDefault(e)
     let v = ReactEvent.Form.target(e)["value"]
-    setEditText(_prev => v)
+    setEditMode(prev => {...prev, text: v})
   }
 
   let cancelEdit = () => {
-    setEditMode(_prev => {id: "", isEditing: false})
+    setEditMode(_prev => {id: "", isEditing: false, text: ""})
   }
 
   let saveEdit = () => {
@@ -130,14 +128,14 @@ let make = () => {
       if todo.id === editMode.id {
         {
           ...todo,
-          text: editText !== "" ? editText : todo.text,
+          text: editMode.text !== "" ? editMode.text : todo.text,
         }
       } else {
         todo
       }
     })
     setTodoList(_prev => updatedTodos)
-    setEditText(_prev => "")
+    setEditMode(_prev => {id: "", isEditing: false, text: ""})
   }
 
   <>
@@ -162,7 +160,6 @@ let make = () => {
         editTodo
         editMode
         onEdit
-        editText
         cancelEdit
         saveEdit
       />

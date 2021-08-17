@@ -9,6 +9,7 @@ type todo = {
 type editMode = {
   id: string,
   isEditing: bool,
+  text: string,
 }
 
 module Todo = {

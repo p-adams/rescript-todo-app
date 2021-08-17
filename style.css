@@ -6,6 +6,7 @@
   --text-left-margin: 10px;
   --selected-blue: slateblue;
   --selected-border: 1px dotted var(--selected-blue);
+  --app-min-width: 365px;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -60,7 +61,7 @@ h3 {
 nav {
   display: flex;
   justify-content: space-between;
-  min-width: 300px;
+  min-width: var(--app-min-width);
   padding: 10px;
   position: relative;
   margin-bottom: 10px;
@@ -105,6 +106,10 @@ button.light {
 
 .icon.completed {
   color: limegreen;
+}
+
+.icon.editing {
+  color: royalblue;
 }
 
 main {
@@ -191,6 +196,9 @@ main.selected-border {
 
 .actions-in-app {
   margin-top: 25px;
+  min-width: var(--app-min-width);
+  display: flex;
+  justify-content: space-between;
 }
 .actions-in-app input {
   background-size: 24px;

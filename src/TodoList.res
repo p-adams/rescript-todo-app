@@ -14,7 +14,6 @@ let make = (
   ~editTodo,
   ~editMode: Todo.editMode,
   ~onEdit,
-  ~editText,
   ~cancelEdit,
   ~saveEdit,
 ) => {
@@ -33,7 +32,7 @@ let make = (
   })
 
   let items = Js.Array2.map(todoList, todo => {
-    <TodoItem key={todo.id} todo={todo} toggleDone onCheck deleteTodo editTodo />
+    <TodoItem key={todo.id} todo={todo} toggleDone onCheck deleteTodo editTodo editMode />
   })
   let hasCheckedTodos = checkedTodoCount() > 0
 
@@ -66,7 +65,9 @@ let make = (
           </>
         | Some(_) => <>
             <input
-              ref={ReactDOM.Ref.domRef(editTextInput)} onChange={e => onEdit(e)} value={editText}
+              ref={ReactDOM.Ref.domRef(editTextInput)}
+              onChange={e => onEdit(e)}
+              value={editMode.text}
             />
             <button className="dark" onClick={_ => cancelEdit()}> {React.string("Cancel")} </button>
             <button className="dark" onClick={_ => saveEdit()}> {React.string("Save")} </button>
