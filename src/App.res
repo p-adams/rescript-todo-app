@@ -148,7 +148,11 @@ let make = () => {
   <>
     <nav>
       <img src={"/favicon.ico"} alt="todo" />
-      <div className="link-container"> <a href="/"> {React.string("Home")} </a> </div>
+      <div className="link-container">
+        <a href="javascript:;" onClick={_ => RescriptReactRouter.push("/")}>
+          {React.string("Home")}
+        </a>
+      </div>
     </nav>
     {switch url.path {
     | list{"details", id} => <TodoDetails id todoList />

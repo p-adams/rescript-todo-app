@@ -12,7 +12,10 @@ let make = (
     <input
       type_="checkbox" onChange={e => onCheck(e, todo.id)} checked={todo.checked || toggleSelectAll}
     />
-    <a href={`/details/${todo.id}`} className={`todo-text ${todo.completed ? "completed" : ""}`}>
+    <a
+      href="javascript:;"
+      onClick={_ => RescriptReactRouter.push(`/details/${todo.id}`)}
+      className={`todo-text ${todo.completed ? "completed" : ""}`}>
       {React.string(todo.text)}
     </a>
     <span
