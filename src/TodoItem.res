@@ -6,9 +6,12 @@ let make = (
   ~deleteTodo,
   ~editTodo,
   ~editMode: Todo.editMode,
+  ~toggleSelectAll,
 ) => {
   <li className="todo-item">
-    <input type_="checkbox" onChange={e => onCheck(e, todo.id)} />
+    <input
+      type_="checkbox" onChange={e => onCheck(e, todo.id)} checked={todo.checked || toggleSelectAll}
+    />
     <a href={`/details/${todo.id}`} className={`todo-text ${todo.completed ? "completed" : ""}`}>
       {React.string(todo.text)}
     </a>

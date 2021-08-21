@@ -32,7 +32,9 @@ let make = (
   })
 
   let items = Js.Array2.map(todoList, todo => {
-    <TodoItem key={todo.id} todo={todo} toggleDone onCheck deleteTodo editTodo editMode />
+    <TodoItem
+      key={todo.id} todo={todo} toggleDone onCheck deleteTodo editTodo editMode toggleSelectAll
+    />
   })
   let hasCheckedTodos = checkedTodoCount() > 0
 
@@ -44,7 +46,7 @@ let make = (
     <main className={hasCheckedTodos ? "selected-border" : ""}>
       <div className="todo-header">
         <label>
-          <input type_="checkbox" onChange={e => onCheckAll(e)} />
+          <input type_="checkbox" onChange={e => onCheckAll(e)} checked={toggleSelectAll} />
           <span> {React.string(!toggleSelectAll ? "Select All" : "Deselect All")} </span>
         </label>
         <div className={`checked-count ${hasCheckedTodos ? "fadein" : "fadeout"}`}>

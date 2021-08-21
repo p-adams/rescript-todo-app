@@ -92,10 +92,17 @@ let make = () => {
     setTodoList(_prev => checkedTodoList)
   }
 
-  let onCheckAll = e => {
+  let onCheckAll = _ => {
     // TODO: implement check all
     setToggleSelectAll(_prev => !toggleSelectAll)
-    Js.log(e)
+    setTodoList(_prev =>
+      Js.Array2.map(todoList, todo => {
+        {
+          ...todo,
+          checked: !toggleSelectAll,
+        }
+      })
+    )
   }
 
   let checkedTodoCount = () => {
