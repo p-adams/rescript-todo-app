@@ -16,6 +16,8 @@ let make = (
   ~onEdit,
   ~cancelEdit,
   ~saveEdit,
+  ~markSelectedTodos,
+  ~cancelMarkSelected,
 ) => {
   let textInput = React.useRef(Js.Nullable.null)
   let editTextInput = React.useRef(Js.Nullable.null)
@@ -37,6 +39,9 @@ let make = (
     />
   })
   let hasCheckedTodos = checkedTodoCount() > 0
+  let hasCompletedTodos = Js.Array2.some(todoList, todo => {
+    todo.checked && todo.completed
+  })
 
   let todoToEdit = Js.Array2.find(todoList, todo => {
     todo.id === editMode.id
@@ -77,9 +82,14 @@ let make = (
         }}
       </div>
       <div className={`bulk-select-action-bar ${hasCheckedTodos ? "fadein" : "fadeout"}`}>
-        <label> {React.string("mark as complete")} <span className="icon fas fa-check" /> </label>
+        <label onClick={_ => markSelectedTodos()}>
+          {React.string(!hasCompletedTodos ? "mark as complete" : "mark as incomplete")}
+          <span className="icon fas fa-check" />
+        </label>
         <label> {React.string("delete")} <span className="icon fas fa-trash" /> </label>
-        <button className="light"> {React.string("Cancel")} </button>
+        <button className="light" onClick={_ => cancelMarkSelected()}>
+          {React.string("Cancel")}
+        </button>
       </div>
     </main>
   </div>

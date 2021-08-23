@@ -145,6 +145,36 @@ let make = () => {
     setEditMode(_prev => {id: "", isEditing: false, text: ""})
   }
 
+  let markSelectedTodos = () => {
+    let updatedTodos = Js.Array2.map(todoList, todo => {
+      if todo.checked {
+        {
+          ...todo,
+          completed: !todo.completed,
+        }
+      } else {
+        todo
+      }
+    })
+    setTodoList(_prev => updatedTodos)
+  }
+
+  let cancelMarkSelected = () => {
+    setTodoList(_prev =>
+      Js.Array2.map(todoList, todo => {
+        if todo.checked {
+          {
+            ...todo,
+            checked: false,
+            completed: false,
+          }
+        } else {
+          todo
+        }
+      })
+    )
+  }
+
   <>
     <nav>
       <img src={"/favicon.ico"} alt="todo" />
@@ -173,6 +203,8 @@ let make = () => {
         onEdit
         cancelEdit
         saveEdit
+        markSelectedTodos
+        cancelMarkSelected
       />
     | _ => <NotFound />
     }}
