@@ -14,7 +14,7 @@ let make = (~id, ~todoList: array<Todo.todo>) => {
   | Some(todo) =>
     <div className="todo-details">
       <div className="field">
-        <span className="label"> <S str="ID" /> </span> <p> <S str={todo.id} /> </p>
+        <span className="label"> <S str="ID" /> </span> <p className="id"> <S str={todo.id} /> </p>
       </div>
       <div className="field">
         <span className="label"> <S str="TODO" /> </span> <p> <S str={todo.text} /> </p>

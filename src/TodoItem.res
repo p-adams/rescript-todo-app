@@ -13,7 +13,7 @@ let make = (
       type_="checkbox" onChange={e => onCheck(e, todo.id)} checked={todo.checked || toggleSelectAll}
     />
     <a
-      href="javascript:;"
+      href="#"
       onClick={_ => RescriptReactRouter.push(`/details/${todo.id}`)}
       className={`todo-text ${todo.completed ? "completed" : ""}`}>
       {React.string(todo.text)}

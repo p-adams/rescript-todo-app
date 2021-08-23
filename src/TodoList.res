@@ -18,6 +18,7 @@ let make = (
   ~saveEdit,
   ~markSelectedTodos,
   ~cancelMarkSelected,
+  ~deletedSelectedTodos,
 ) => {
   let textInput = React.useRef(Js.Nullable.null)
   let editTextInput = React.useRef(Js.Nullable.null)
@@ -86,7 +87,9 @@ let make = (
           {React.string(!hasCompletedTodos ? "mark as complete" : "mark as incomplete")}
           <span className="icon fas fa-check" />
         </label>
-        <label> {React.string("delete")} <span className="icon fas fa-trash" /> </label>
+        <label onClick={_ => deletedSelectedTodos()}>
+          {React.string("delete")} <span className="icon fas fa-trash" />
+        </label>
         <button className="light" onClick={_ => cancelMarkSelected()}>
           {React.string("Cancel")}
         </button>

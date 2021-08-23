@@ -175,13 +175,24 @@ let make = () => {
     )
   }
 
+  let deletedSelectedTodos = () => {
+    setTodoList(_prev =>
+      Js.Array2.filter(todoList, todo => {
+        !Js.Array2.includes(
+          Js.Array2.filter(todoList, todo => {
+            todo.checked
+          }),
+          todo,
+        )
+      })
+    )
+  }
+
   <>
     <nav>
       <img src={"/favicon.ico"} alt="todo" />
       <div className="link-container">
-        <a href="javascript:;" onClick={_ => RescriptReactRouter.push("/")}>
-          {React.string("Home")}
-        </a>
+        <a href="#" onClick={_ => RescriptReactRouter.push("/")}> {React.string("Home")} </a>
       </div>
     </nav>
     {switch url.path {
@@ -205,6 +216,7 @@ let make = () => {
         saveEdit
         markSelectedTodos
         cancelMarkSelected
+        deletedSelectedTodos
       />
     | _ => <NotFound />
     }}
