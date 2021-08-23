@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite & rescript build -w",
-    "build": "vite build & rescript build",
+    "build": "rescript & vite build",
     "serve": "vite preview",
     "re:build": "rescript",
     "re:start": "rescript build -w"
