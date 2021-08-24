@@ -2,6 +2,8 @@
 
 Todo app implemented in Rescript React and built on Vite.
 
+View live demo [Here](https://vibrant-shockley-69ef4a.netlify.app/).
+
 ### Objective
 
 Build an easy-to-use, feature-rich todo application that showcases how to use the subsequent React bindings for ReScript:
